@@ -20,7 +20,7 @@ class RocketDetailViewModel(
 
     private fun fetchRocketDetail() {
         launch {
-            repo.fetchCharacter(rocketId)
+            repo.fetchCharacterInfo(rocketId)
                 .let { detail ->
                     _rocketDetail.emit(detail)
                 }

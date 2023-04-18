@@ -18,7 +18,7 @@ class LaunchesViewModel(
 
     private fun fetchSuccessfulRocketLaunches() {
         launch {
-            val launches = repo.fetchAllCharacter()
+            val launches = repo.fetchAllCharacters()
             _successfulRocketLaunches.emit(launches)
         }
     }

@@ -1,11 +1,13 @@
 package cz.uhk.umte.ui
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import cz.uhk.umte.ui.async.characters.CharactersScreen
 import cz.uhk.umte.ui.async.launches.RocketLaunchesScreen
 import cz.uhk.umte.ui.async.rocket.RocketDetailScreen
 import cz.uhk.umte.ui.home.HomeScreen
@@ -33,8 +35,8 @@ fun AppContainer(
             route = DestinationLaunches,
         ) {
             RocketLaunchesScreen(
-                onNavigateDetail = { rocketId ->
-                    controller.navigateRocketDetail(rocketId)
+                onNavigateDetail = { rocketIdButNotAtAll ->
+                    controller.navigateRocketDetail(rocketIdButNotAtAll)
                 },
             )
         }
@@ -47,6 +49,16 @@ fun AppContainer(
                 rocketId = navBackStackEntry.arguments?.getString(ArgRocketId).orEmpty(),
             )
         }
+
+        composable(
+            route = DestinationCharacters,
+        ) {
+           CharactersScreen {
+               onNavigateDetail = { characterName ->
+                   controller.navigateCharacterInfo(characterName)
+               }
+           }
+        }
     }
 }
 
@@ -57,6 +69,11 @@ private const val DestinationLaunches = "launches"
 private const val DestinationRocketDetail = "rocket/{$ArgRocketId}"
 private const val DestinationRoom = "room"
 
+private const val ArgCharacterName = "argCharacterName"
+
+private const val DestinationCharacters = "characters"
+private const val DestinationCharacterInfo = "{$ArgCharacterName}"
+
 fun NavHostController.navigateRocketDetail(rocketId: String) =
     navigate(DestinationRocketDetail.replaceArg(ArgRocketId, rocketId))
 
@@ -65,6 +82,13 @@ fun NavHostController.navigateRocketLaunches() =
 
 fun NavHostController.navigateRoomScreen() =
     navigate(DestinationRoom)
+
+
+fun NavHostController.navigateCharacterScreen() =
+    navigate(DestinationCharacters)
+
+fun NavHostController.navigateCharacterInfo(characterName: String) =
+    navigate(DestinationCharacterInfo.replaceArg(ArgCharacterName, characterName))
 
 private fun String.replaceArg(argName: String, value: String) =
     replace("{$argName}", value)

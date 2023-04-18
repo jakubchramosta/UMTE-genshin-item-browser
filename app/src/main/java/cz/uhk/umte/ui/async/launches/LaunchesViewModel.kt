@@ -1,16 +1,15 @@
 package cz.uhk.umte.ui.async.launches
 
-import cz.uhk.umte.data.remote.response.RocketLaunchResponse
-import cz.uhk.umte.di.repositories.SpaceXRepository
+import cz.uhk.umte.di.repositories.GenshinDevRepository
 import cz.uhk.umte.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class LaunchesViewModel(
-    private val repo: SpaceXRepository,
+    private val repo: GenshinDevRepository,
 ) : BaseViewModel() {
 
-    private val _successfulRocketLaunches = MutableStateFlow<List<RocketLaunchResponse>>(emptyList())
+    private val _successfulRocketLaunches = MutableStateFlow<List<String>>(emptyList())
     val successRocketLaunches = _successfulRocketLaunches.asStateFlow()
 
     init {
@@ -19,7 +18,7 @@ class LaunchesViewModel(
 
     private fun fetchSuccessfulRocketLaunches() {
         launch {
-            val launches = repo.fetchAllSuccessfulLaunches()
+            val launches = repo.fetchAllCharacter()
             _successfulRocketLaunches.emit(launches)
         }
     }

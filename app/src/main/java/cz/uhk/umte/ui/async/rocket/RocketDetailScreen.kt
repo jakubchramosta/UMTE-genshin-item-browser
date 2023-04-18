@@ -1,8 +1,5 @@
 package cz.uhk.umte.ui.async.rocket
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,11 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cz.uhk.umte.R
-import cz.uhk.umte.data.remote.response.RocketDetailResponse
+import cz.uhk.umte.data.remote.response.CharacterInfoResponse
 import cz.uhk.umte.ui.base.State
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -60,23 +56,11 @@ fun RocketDetailScreen(
 }
 
 @Composable
-fun RocketDetailView(detail: RocketDetailResponse) {
+fun RocketDetailView(detail: CharacterInfoResponse) {
     Column(
         modifier = Modifier.padding(16.dp),
     ) {
         Text(text = detail.name, style = MaterialTheme.typography.h5)
-        Text(text = detail.description)
-        detail.wikipediaLink?.let { url ->
-
-            val context = LocalContext.current
-
-            Button(onClick = { context.openWebPage(url) }) {
-                Text(text = "Wikipedia")
-            }
-        }
+        Text(text = detail.vision)
     }
-}
-
-private fun Context.openWebPage(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }

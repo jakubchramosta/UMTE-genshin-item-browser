@@ -11,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.navigation.NavHostController
 import cz.uhk.umte.R
 import cz.uhk.umte.ui.navigateRocketLaunches
@@ -20,7 +22,6 @@ import cz.uhk.umte.ui.navigateRoomScreen
 fun HomeScreen(
     parentController: NavHostController,
 ) {
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

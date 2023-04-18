@@ -11,13 +11,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cz.uhk.umte.R
-import cz.uhk.umte.data.remote.response.RocketLaunchResponse
 import cz.uhk.umte.ui.base.State
 import org.koin.androidx.compose.getViewModel
-import java.io.IOException
 
 @Composable
 fun RocketLaunchesScreen(
@@ -35,10 +32,9 @@ fun RocketLaunchesScreen(
     )
 }
 
-@Preview
 @Composable
 fun RocketLaunchesViews(
-    launches: List<RocketLaunchResponse> = emptyList(),
+    launches: List<String> = emptyList(),
     state: State = State.None,
     onNavigateDetail: (String) -> Unit = {},
 ) {
@@ -68,7 +64,7 @@ fun RocketLaunchesViews(
                             Row(
                                 modifier = Modifier
                                     .clickable {
-                                        onNavigateDetail(launch.rocket.rocketId)
+                                        onNavigateDetail(launch)
                                     }
                                     .background(MaterialTheme.colors.error)
                                     .padding(16.dp)
@@ -76,7 +72,7 @@ fun RocketLaunchesViews(
                                     .padding(16.dp)
                             ) {
                                 Text(
-                                    text = launch.missionName ?: "-",
+                                    text = launch ?: "-",
                                     style = MaterialTheme.typography.h6,
                                     modifier = Modifier.weight(1F),
                                 )

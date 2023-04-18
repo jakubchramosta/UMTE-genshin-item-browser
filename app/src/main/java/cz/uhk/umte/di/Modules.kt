@@ -2,15 +2,14 @@ package cz.uhk.umte.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import cz.uhk.umte.data.remote.ApiConfig
-import cz.uhk.umte.data.remote.service.SpaceXAPIService
-import cz.uhk.umte.di.repositories.SpaceXRepository
+import cz.uhk.umte.data.remote.service.GenshinDevService
+import cz.uhk.umte.di.repositories.GenshinDevRepository
 import cz.uhk.umte.ui.async.launches.LaunchesViewModel
 import cz.uhk.umte.ui.async.rocket.RocketDetailViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -29,16 +28,12 @@ val uiModule = module {
 }
 
 private fun Module.repositories() {
-    single { SpaceXRepository(get()) }
+    single { GenshinDevRepository(get()) }
 }
 
 private fun Module.apiServices() {
     single { createRetrofit(createClient()) }
-    single { get<Retrofit>().create(SpaceXAPIService::class.java) }
-}
-
-private fun Module.dataStorage() {
-    // TODO datastore
+    single { get<Retrofit>().create(GenshinDevService::class.java) }
 }
 
 private val json = Json {

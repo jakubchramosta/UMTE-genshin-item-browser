@@ -6,11 +6,10 @@ import cz.uhk.umte.data.remote.service.GenshinDevService
 import cz.uhk.umte.di.repositories.GenshinDevRepository
 import cz.uhk.umte.ui.async.characterInfo.CharacterInfoViewModel
 import cz.uhk.umte.ui.async.characters.CharactersViewModel
-import cz.uhk.umte.ui.async.launches.LaunchesViewModel
-import cz.uhk.umte.ui.async.rocket.RocketDetailViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -25,9 +24,7 @@ val dataModule = module {
 }
 
 val uiModule = module {
-    viewModel { LaunchesViewModel(get()) }
     viewModel { CharactersViewModel(get()) }
-    viewModel { (rocketId: String) -> RocketDetailViewModel(rocketId, get()) }
     viewModel { (characterName: String) -> CharacterInfoViewModel(characterName, get()) }
 }
 
@@ -53,7 +50,7 @@ private fun createRetrofit(
     baseUrl(baseUrl)
     addConverterFactory(
         json.asConverterFactory(
-            MediaType.get("application/json")
+            "application/json".toMediaType()
         )
     )
 }.build()

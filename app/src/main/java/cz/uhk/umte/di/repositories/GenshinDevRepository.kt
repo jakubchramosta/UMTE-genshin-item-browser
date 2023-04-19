@@ -11,4 +11,10 @@ class GenshinDevRepository(
 
     suspend fun fetchCharacterInfo(charName: String) =
         api.fetchCharacter(charName)
+
+    suspend fun fetchAllArtefacts() =
+        api.fetchAllArtifacts()
+
+    suspend fun fetchAllArtifactsAsObject() =
+        api.fetchAllArtifactsAsObject()
 }

@@ -1,4 +1,4 @@
-package cz.uhk.umte.ui.home1
+package cz.uhk.umte.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import cz.uhk.umte.R
 import cz.uhk.umte.ui.navigateCharacterScreen
-import cz.uhk.umte.ui.navigateRocketLaunches
 
 @Composable
 fun HomeScreen(
@@ -25,18 +24,24 @@ fun HomeScreen(
     ) {
         Button(
             onClick = {
-                parentController.navigateRocketLaunches()
+                parentController.navigateCharacterScreen()
             }
         ) {
-            Text(text = stringResource(id = R.string.home_btn_launches))
+            Text(text = stringResource(id = R.string.home_btn_characters))
         }
-
         Button(
             onClick = {
                 parentController.navigateCharacterScreen()
             }
         ) {
-            Text("Characters")
+            Text(text = stringResource(id = R.string.home_btn_artifacts))
+        }
+        Button(
+            onClick = {
+                parentController.navigateCharacterScreen()
+            }
+        ) {
+            Text(text = stringResource(id = R.string.home_btn_weapons))
         }
     }
 }

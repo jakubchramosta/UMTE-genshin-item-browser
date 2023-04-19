@@ -7,11 +7,16 @@ import retrofit2.http.Path
 interface GenshinDevService {
 
     @GET("characters")
-    suspend fun fetchAllCharacters(
-    ): List<String>
+    suspend fun fetchAllCharacters(): List<String>
 
     @GET("characters/{charName}")
     suspend fun fetchCharacter(
         @Path("charName") charName: String
     ): CharacterInfoResponse?
+
+    @GET("artifacts")
+    suspend fun fetchAllArtifacts(): List<String>
+
+    @GET("characters/all")
+    suspend fun fetchAllArtifactsAsObject(): CharacterInfoResponse?
 }

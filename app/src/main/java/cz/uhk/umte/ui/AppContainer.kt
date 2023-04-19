@@ -8,9 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import cz.uhk.umte.ui.async.characterInfo.CharacterInfoScreen
 import cz.uhk.umte.ui.async.characters.CharactersScreen
-import cz.uhk.umte.ui.async.launches.RocketLaunchesScreen
-import cz.uhk.umte.ui.async.rocket.RocketDetailScreen
-import cz.uhk.umte.ui.home1.HomeScreen
+import cz.uhk.umte.ui.home.HomeScreen
 
 @Composable
 fun AppContainer(
@@ -28,25 +26,6 @@ fun AppContainer(
         ) {
             HomeScreen(
                 parentController = controller,
-            )
-        }
-
-        composable(
-            route = DestinationLaunches,
-        ) {
-            RocketLaunchesScreen(
-                onNavigateDetail = { rocketId ->
-                    controller.navigateRocketDetail(rocketId)
-                },
-            )
-        }
-
-        composable(
-            route = DestinationRocketDetail,
-            arguments = listOf(navArgument(ArgRocketId) { type = NavType.StringType })
-        ) { navBackStackEntry ->
-            RocketDetailScreen(
-                rocketId = navBackStackEntry.arguments?.getString(ArgRocketId).orEmpty(),
             )
         }
 
@@ -71,21 +50,11 @@ fun AppContainer(
     }
 }
 
-private const val ArgRocketId = "argRocketId"
 private const val ArgCharacterName = "argCharacterName"
 
 private const val DestinationHome = "home"
-private const val DestinationLaunches = "launches"
-private const val DestinationRocketDetail = "rocket/{$ArgRocketId}"
 private const val DestinationCharacters = "characters"
 private const val DestinationCharacterInfo = "character/{$ArgCharacterName}"
-
-fun NavHostController.navigateRocketDetail(rocketId: String) =
-    navigate(DestinationRocketDetail.replaceArg(ArgRocketId, rocketId))
-
-fun NavHostController.navigateRocketLaunches() =
-    navigate(DestinationLaunches)
-
 
 fun NavHostController.navigateCharacterScreen() =
     navigate(DestinationCharacters)

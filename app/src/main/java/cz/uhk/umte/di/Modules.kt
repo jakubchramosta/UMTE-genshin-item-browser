@@ -4,6 +4,8 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import cz.uhk.umte.data.remote.ApiConfig
 import cz.uhk.umte.data.remote.service.GenshinDevService
 import cz.uhk.umte.di.repositories.GenshinDevRepository
+import cz.uhk.umte.ui.async.characterInfo.CharacterInfoViewModel
+import cz.uhk.umte.ui.async.characters.CharactersViewModel
 import cz.uhk.umte.ui.async.launches.LaunchesViewModel
 import cz.uhk.umte.ui.async.rocket.RocketDetailViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -24,7 +26,9 @@ val dataModule = module {
 
 val uiModule = module {
     viewModel { LaunchesViewModel(get()) }
+    viewModel { CharactersViewModel(get()) }
     viewModel { (rocketId: String) -> RocketDetailViewModel(rocketId, get()) }
+    viewModel { (characterName: String) -> CharacterInfoViewModel(characterName, get()) }
 }
 
 private fun Module.repositories() {

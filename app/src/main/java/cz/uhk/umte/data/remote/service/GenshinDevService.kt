@@ -14,6 +14,4 @@ interface GenshinDevService {
     suspend fun fetchCharacter(
         @Path("charName") charName: String
     ): CharacterInfoResponse?
-
-
 }

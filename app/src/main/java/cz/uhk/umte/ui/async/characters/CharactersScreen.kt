@@ -19,15 +19,16 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun CharactersScreen(
     viewModel: CharactersViewModel = getViewModel(),
-    onNavigateDetail: (String) -> Unit,
+    onNavigateInfo: (String) -> Unit,
 ) {
+
     val characterList = viewModel.characterList.collectAsState()
     val state = viewModel.state.collectAsState()
 
     CharactersViews(
         characterNameList = characterList.value,
         state = state.value,
-        onNavigateDetail = onNavigateDetail,
+        onNavigateInfo = onNavigateInfo,
     )
 }
 
@@ -35,7 +36,7 @@ fun CharactersScreen(
 fun CharactersViews(
     characterNameList: List<String> = emptyList(),
     state: State = State.None,
-    onNavigateDetail: (String) -> Unit = {},
+    onNavigateInfo: (String) -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -63,7 +64,7 @@ fun CharactersViews(
                             Row(
                                 modifier = Modifier
                                     .clickable {
-                                        onNavigateDetail(character)
+                                        onNavigateInfo(character)
                                     }
                                     .background(MaterialTheme.colors.error)
                                     .padding(16.dp)

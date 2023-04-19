@@ -16,7 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cz.uhk.umte.R
 import cz.uhk.umte.data.remote.response.CharacterInfoResponse
-import cz.uhk.umte.ui.async.rocket.CharacterInfoView
 import cz.uhk.umte.ui.base.State
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -45,8 +44,8 @@ fun CharacterInfoScreen(
                 }
             }
             is State.Success -> {
-                characterInfo.value?.let { info ->
-                    CharacterInfoView(info)
+                characterInfo.value?.let { characterInfo ->
+                    CharacterInfoView(characterInfo)
                 } ?: run {
                     Text(text = "No data available")
                 }

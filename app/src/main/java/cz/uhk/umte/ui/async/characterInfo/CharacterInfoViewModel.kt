@@ -15,7 +15,7 @@ class CharacterInfoViewModel(
     val characterInfo = _characterInfo.asStateFlow()
 
     init {
-
+        fetchCharacterInfo()
     }
 
     private fun fetchCharacterInfo() {

@@ -1,16 +1,16 @@
 package cz.uhk.umte.ui
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import cz.uhk.umte.ui.async.characterInfo.CharacterInfoScreen
 import cz.uhk.umte.ui.async.characters.CharactersScreen
 import cz.uhk.umte.ui.async.launches.RocketLaunchesScreen
 import cz.uhk.umte.ui.async.rocket.RocketDetailScreen
-import cz.uhk.umte.ui.home.HomeScreen
+import cz.uhk.umte.ui.home1.HomeScreen
 
 @Composable
 fun AppContainer(
@@ -35,8 +35,8 @@ fun AppContainer(
             route = DestinationLaunches,
         ) {
             RocketLaunchesScreen(
-                onNavigateDetail = { rocketIdButNotAtAll ->
-                    controller.navigateRocketDetail(rocketIdButNotAtAll)
+                onNavigateDetail = { rocketId ->
+                    controller.navigateRocketDetail(rocketId)
                 },
             )
         }
@@ -53,35 +53,38 @@ fun AppContainer(
         composable(
             route = DestinationCharacters,
         ) {
-           CharactersScreen {
-               onNavigateDetail = { characterName ->
-                   controller.navigateCharacterInfo(characterName)
-               }
-           }
+            CharactersScreen (
+                onNavigateInfo = { characterName ->
+                    controller.navigateCharacterInfo(characterName)
+                },
+            )
+        }
+
+        composable(
+            route = DestinationCharacterInfo,
+            arguments = listOf(navArgument(ArgCharacterName) { type = NavType.StringType })
+        ) { navBackStackEntry ->
+            CharacterInfoScreen(
+                characterName = navBackStackEntry.arguments?.getString(ArgCharacterName).orEmpty(),
+            )
         }
     }
 }
 
 private const val ArgRocketId = "argRocketId"
+private const val ArgCharacterName = "argCharacterName"
 
 private const val DestinationHome = "home"
 private const val DestinationLaunches = "launches"
 private const val DestinationRocketDetail = "rocket/{$ArgRocketId}"
-private const val DestinationRoom = "room"
-
-private const val ArgCharacterName = "argCharacterName"
-
 private const val DestinationCharacters = "characters"
-private const val DestinationCharacterInfo = "{$ArgCharacterName}"
+private const val DestinationCharacterInfo = "character/{$ArgCharacterName}"
 
 fun NavHostController.navigateRocketDetail(rocketId: String) =
     navigate(DestinationRocketDetail.replaceArg(ArgRocketId, rocketId))
 
 fun NavHostController.navigateRocketLaunches() =
     navigate(DestinationLaunches)
-
-fun NavHostController.navigateRoomScreen() =
-    navigate(DestinationRoom)
 
 
 fun NavHostController.navigateCharacterScreen() =

@@ -9,6 +9,21 @@ class CharacterInfoResponse(
     @SerialName("name")
     val name: String,
 
+    @SerialName("description")
+    val description: String,
+
+    @SerialName("weapon")
+    val weapon: String,
+
     @SerialName("vision")
-    val vision: String
+    val vision: String,
+
+    @SerialName("affiliation")
+    val affiliation: String,
+
+    @SerialName("nation")
+    val nation: String,
+
+    @SerialName("rarity")
+    val rarity: Int
 )

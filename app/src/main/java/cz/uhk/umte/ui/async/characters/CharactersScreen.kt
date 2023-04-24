@@ -1,6 +1,5 @@
 package cz.uhk.umte.ui.async.characters
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,15 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import cz.uhk.umte.R
+import cz.uhk.umte.data.remote.response.CharacterInfoResponse
 import cz.uhk.umte.ui.base.State
-import cz.uhk.umte.ui.theme.UMTETheme
 import org.koin.androidx.compose.getViewModel
 
 
@@ -33,7 +31,7 @@ fun CharactersScreen(
     val state = viewModel.state.collectAsState()
 
     CharactersViews(
-        characterNameList = characterList.value,
+        characterList = characterList.value,
         state = state.value,
         onNavigateInfo = onNavigateInfo,
     )
@@ -42,7 +40,7 @@ fun CharactersScreen(
 @Preview
 @Composable
 fun CharactersViews(
-    characterNameList: List<String> = emptyList(),
+    characterList: List<CharacterInfoResponse> = emptyList(),
     state: State = State.None,
     onNavigateInfo: (String) -> Unit = {},
 ) {
@@ -67,32 +65,28 @@ fun CharactersViews(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     contentPadding = PaddingValues(all = 8.dp),
                 ) {
-                    items(characterNameList) { character ->
+                    items(characterList) { character ->
                         Card {
                             Row(
                                 modifier = Modifier.height(120.dp)
                                     .clickable {
-                                        onNavigateInfo(character)
+                                        onNavigateInfo(character.characterId)
                                     }
                                     .background(MaterialTheme.colors.primaryVariant)
                                     .padding(16.dp)
                             ) {
-                                    AsyncImage(
-                                        model = "https://api.genshin.dev/characters/$character/icon-big",
-                                        contentDescription = null,
-                                        modifier = Modifier.fillMaxWidth(0.3f).padding(5.dp),
-                                        contentScale = ContentScale.FillWidth,
-                                        alignment = Alignment.Center,
-                                    )
-                                    Text(
-                                        text = character,
-                                        style = MaterialTheme.typography.h6,
-                                        modifier = Modifier.weight(1F).padding(8.dp),
-                                    )
-//                                Column (
-//                                    modifier = Modifier.fillMaxWidth(),
-//                                        ){
-//                                }
+                                AsyncImage(
+                                    model = "https://api.genshin.dev/characters/${character.characterId}/icon-big",
+                                    contentDescription = null,
+                                    modifier = Modifier.fillMaxWidth(0.3f).padding(5.dp),
+                                    contentScale = ContentScale.FillWidth,
+                                    alignment = Alignment.Center,
+                                )
+                                Text(
+                                    text = character.name,
+                                    style = MaterialTheme.typography.h6,
+                                    modifier = Modifier.weight(1F).padding(8.dp),
+                                )
                             }
                         }
                     }

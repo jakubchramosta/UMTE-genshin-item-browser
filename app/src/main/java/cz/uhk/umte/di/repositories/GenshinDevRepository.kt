@@ -6,15 +6,12 @@ import cz.uhk.umte.data.remote.service.GenshinDevService
 class GenshinDevRepository(
     private val api: GenshinDevService
 ) {
+    suspend fun fetchCharactersIDs() =
+        api.fetchCharactersIDs()
+
     suspend fun fetchAllCharacters() =
         api.fetchAllCharacters()
 
     suspend fun fetchCharacterInfo(charName: String) =
         api.fetchCharacter(charName)
-
-    suspend fun fetchAllArtifacts() =
-        api.fetchAllArtifacts()
-
-    suspend fun fetchAllArtifactsAsObject() =
-        api.fetchAllArtifactsAsObject()
 }

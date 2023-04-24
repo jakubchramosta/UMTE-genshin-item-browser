@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import cz.uhk.umte.ui.async.characterInfo.CharacterInfoScreen
+import cz.uhk.umte.ui.async.characters.characterInfo.CharacterInfoScreen
 import cz.uhk.umte.ui.async.characters.CharactersScreen
 import cz.uhk.umte.ui.home.HomeScreen
 

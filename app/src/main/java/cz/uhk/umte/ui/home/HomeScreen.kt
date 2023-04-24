@@ -29,19 +29,5 @@ fun HomeScreen(
         ) {
             Text(text = stringResource(id = R.string.home_btn_characters))
         }
-        Button(
-            onClick = {
-                parentController.navigateCharacterScreen()
-            }
-        ) {
-            Text(text = stringResource(id = R.string.home_btn_artifacts))
-        }
-        Button(
-            onClick = {
-                parentController.navigateCharacterScreen()
-            }
-        ) {
-            Text(text = stringResource(id = R.string.home_btn_weapons))
-        }
     }
 }

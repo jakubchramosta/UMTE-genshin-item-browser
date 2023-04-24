@@ -1,4 +1,4 @@
-package cz.uhk.umte.ui.async.characterInfo
+package cz.uhk.umte.ui.async.characters.characterInfo
 
 import cz.uhk.umte.data.remote.response.CharacterInfoResponse
 import cz.uhk.umte.di.repositories.GenshinDevRepository

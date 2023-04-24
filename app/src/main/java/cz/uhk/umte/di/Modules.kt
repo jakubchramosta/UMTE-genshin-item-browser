@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import cz.uhk.umte.data.remote.ApiConfig
 import cz.uhk.umte.data.remote.service.GenshinDevService
 import cz.uhk.umte.di.repositories.GenshinDevRepository
-import cz.uhk.umte.ui.async.characterInfo.CharacterInfoViewModel
+import cz.uhk.umte.ui.async.characters.characterInfo.CharacterInfoViewModel
 import cz.uhk.umte.ui.async.characters.CharactersViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json

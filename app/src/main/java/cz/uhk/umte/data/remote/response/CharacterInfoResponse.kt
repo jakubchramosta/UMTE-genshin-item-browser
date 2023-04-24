@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 class CharacterInfoResponse(
 
+    var characterId: String,
+
     @SerialName("name")
     val name: String,
 

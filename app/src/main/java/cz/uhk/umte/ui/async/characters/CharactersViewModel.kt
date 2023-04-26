@@ -15,9 +15,10 @@ class CharactersViewModel(
     private val _characterIDs = MutableStateFlow<List<String>>(emptyList())
 
     init {
-        fetchAllCharacters()
-        fetchCharactersIDs()
-        setCharactersIDs()
+//        fetchAllCharacters()
+//        fetchCharactersIDs()
+//        setCharactersIDs()
+        fetchAllCharacters2()
     }
 
     private fun fetchAllCharacters(){
@@ -38,7 +39,7 @@ class CharactersViewModel(
         val charactersIDsList = _characterIDs.asStateFlow()
 
         var count = 0
-        for (charInfo in characterList.value){
+        for (charInfo in _characterList.value){
             charInfo.characterId = charactersIDsList.value[count]
             count++
         }
@@ -68,6 +69,8 @@ class CharactersViewModel(
             repo.fetchAllCharacters().let {
                 var count = 0
                 for (charInfo in it){
+                    println(charInfo)
+                    println(charactersIDs[count])
                     charInfo.characterId = charactersIDs[count]
                     count++
                 }

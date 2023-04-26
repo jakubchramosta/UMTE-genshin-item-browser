@@ -12,12 +12,39 @@ class CharactersViewModel(
 
     private val _characterList = MutableStateFlow<List<CharacterInfoResponse>>(emptyList())
     val characterList = _characterList.asStateFlow()
+    private val _characterIDs = MutableStateFlow<List<String>>(emptyList())
 
     init {
-        fetchAllCharacters2()
+        fetchAllCharacters()
+        fetchCharactersIDs()
+        setCharactersIDs()
     }
 
-    private fun fetchAllCharacters() {
+    private fun fetchAllCharacters(){
+        launch {
+            val characters = repo.fetchAllCharacters()
+            _characterList.emit(characters)
+        }
+    }
+
+    private fun fetchCharactersIDs(){
+        launch {
+            val charactersIDs = repo.fetchCharactersIDs()
+            _characterIDs.emit(charactersIDs)
+        }
+    }
+
+    private fun setCharactersIDs(){
+        val charactersIDsList = _characterIDs.asStateFlow()
+
+        var count = 0
+        for (charInfo in characterList.value){
+            charInfo.characterId = charactersIDsList.value[count]
+            count++
+        }
+    }
+
+    private fun fetchAllCharacters1() {
         launch {
             //TODO: v této části je potřeba aby se přidalo ID každému charakteru (oba listy jsou seřazeny abecedně)
             val characterList = repo.fetchAllCharacters()

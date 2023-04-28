@@ -2,8 +2,18 @@
     <string name="app_name">UMTE</string>
 
     <string name="home_btn_characters">Characters</string>
+    <string name="home_btn_filterByWeapon">Weapon</string>
+    <string name="home_btn_filterByElement">Element</string>
+    <string name="home_btn_resetFilter">Reset</string>
     <string name="home_btn_artifacts">Artifacts</string>
     <string name="home_btn_weapons">Weapons</string>
 
     <string name="retry">Load again</string>
+
+    <string name="weapon_type_sword">Sword</string>
+    <string name="weapon_type_claymore">Claymore</string>
+    <string name="weapon_type_catalyst">Catalyst</string>
+    <string name="weapon_type_bow">Bow</string>
+    <string name="weapon_type_polearm">Polearm</string>
+
 </resources>

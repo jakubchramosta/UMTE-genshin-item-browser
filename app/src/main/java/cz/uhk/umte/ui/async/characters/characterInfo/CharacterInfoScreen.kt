@@ -65,9 +65,9 @@ fun CharacterInfoView(info: CharacterInfoResponse, character: String) {
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         AsyncImage(
-            model = "https://api.genshin.dev/characters/$character/portrait",
+            model = "https://api.genshin.dev/characters/$character/gacha-splash",
             contentDescription = null,
-            modifier = Modifier.fillMaxWidth(0.6f).padding(5.dp),
+            modifier = Modifier.fillMaxWidth().padding(5.dp),
             contentScale = ContentScale.FillWidth,
             alignment = Alignment.Center,
         )

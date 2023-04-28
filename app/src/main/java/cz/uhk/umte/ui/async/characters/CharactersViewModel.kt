@@ -5,6 +5,7 @@ import cz.uhk.umte.di.repositories.GenshinDevRepository
 import cz.uhk.umte.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class CharactersViewModel(
     private val repo: GenshinDevRepository
@@ -12,70 +13,48 @@ class CharactersViewModel(
 
     private val _characterList = MutableStateFlow<List<CharacterInfoResponse>>(emptyList())
     val characterList = _characterList.asStateFlow()
-    private val _characterIDs = MutableStateFlow<List<String>>(emptyList())
+
+    private val _textFieldInput = MutableStateFlow<String>("")
+    val textFieldInput = _textFieldInput.asStateFlow()
 
     init {
-//        fetchAllCharacters()
-//        fetchCharactersIDs()
-//        setCharactersIDs()
-        fetchAllCharacters2()
+        fetchAllCharacters()
     }
 
     private fun fetchAllCharacters(){
         launch {
-            val characters = repo.fetchAllCharacters()
-            _characterList.emit(characters)
-        }
-    }
-
-    private fun fetchCharactersIDs(){
-        launch {
-            val charactersIDs = repo.fetchCharactersIDs()
-            _characterIDs.emit(charactersIDs)
-        }
-    }
-
-    private fun setCharactersIDs(){
-        val charactersIDsList = _characterIDs.asStateFlow()
-
-        var count = 0
-        for (charInfo in _characterList.value){
-            charInfo.characterId = charactersIDsList.value[count]
-            count++
-        }
-    }
-
-    private fun fetchAllCharacters1() {
-        launch {
-            //TODO: v této části je potřeba aby se přidalo ID každému charakteru (oba listy jsou seřazeny abecedně)
-            val characterList = repo.fetchAllCharacters()
-            val charactersIDs = repo.fetchCharactersIDs()
-
-            var count = 0
-            for (charID in charactersIDs){
-                characterList[count].characterId = charID
-                count++
-            }
-
-            _characterList.emit(characterList)
-        }
-    }
-
-    private fun fetchAllCharacters2(){
-        launch {
-            //TODO: pokus "vynutit" fetch všech charakterů
             val charactersIDs = repo.fetchCharactersIDs()
 
             repo.fetchAllCharacters().let {
-                var count = 0
-                for (charInfo in it){
-                    println(charInfo)
-                    println(charactersIDs[count])
+                for ((count, charInfo) in it.withIndex()){
                     charInfo.characterId = charactersIDs[count]
-                    count++
                 }
                 _characterList.emit(it)
             }
         }
+    }
+
+    fun updateTextField(input: String){
+        _textFieldInput.update { input }
+    }
+
+    fun filterCharListByName(textInput: String) {
+        var tempList = characterList.value.filter { it.name.contains(textInput) }
+        launch { _characterList.emit(tempList) }
+    }
+
+    fun filterCharListByWeapon(weaponType: String) {
+        var tempList = characterList.value.filter { it.weapon == weaponType }
+        launch { _characterList.emit(tempList) }
+    }
+
+    fun filterCharListByElement(elementType: String) {
+        var tempList = characterList.value.filter { it.vision == elementType }
+        launch { _characterList.emit(tempList) }
+    }
+
+    fun resetFilter() {
+        fetchAllCharacters()
+        launch { _textFieldInput.emit("") }
     }
 }

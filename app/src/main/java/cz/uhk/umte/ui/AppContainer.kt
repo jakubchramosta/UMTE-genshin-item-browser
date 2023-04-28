@@ -1,6 +1,7 @@
 package cz.uhk.umte.ui
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost

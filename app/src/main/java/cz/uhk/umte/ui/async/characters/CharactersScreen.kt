@@ -75,19 +75,12 @@ fun CharactersViews(
                     Row (
                         modifier = Modifier.padding(5.dp),
                     ){
-                        Text(
-                            text = ("Filter by:"),
-                        )
-                    }
-                    Row (
-                        modifier = Modifier.padding(5.dp),
-                    ){
                         TextField(
                             modifier = Modifier.fillMaxWidth(),
                             value = textFieldInput,
                             onValueChange = { viewModel.updateTextField(it) },
                             label = {
-                                Text(text = "Name")
+                                Text(text = "Filter by name")
                             },
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Text,
@@ -122,6 +115,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByWeapon("Sword")
+                                        weaponMenuExpanded = false
                                     }
                                 ) {
                                     Text(text = stringResource(id = R.string.weapon_type_sword))
@@ -129,6 +123,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByWeapon("Claymore")
+                                        weaponMenuExpanded = false
                                     }
                                 ) {
                                     Text(text = stringResource(id = R.string.weapon_type_claymore))
@@ -136,6 +131,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByWeapon("Catalyst")
+                                        weaponMenuExpanded = false
                                     }
                                 ) {
                                     Text(text = stringResource(id = R.string.weapon_type_catalyst))
@@ -143,6 +139,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByWeapon("Bow")
+                                        weaponMenuExpanded = false
                                     }
                                 ) {
                                     Text(text = stringResource(id = R.string.weapon_type_bow))
@@ -150,6 +147,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByWeapon("Polearm")
+                                        weaponMenuExpanded = false
                                     }
                                 ) {
                                     Text(text = stringResource(id = R.string.weapon_type_polearm))
@@ -174,6 +172,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByElement("Pyro")
+                                        elementMenuExpanded = false
                                     }
                                 ) {
                                     Text("Pyro")
@@ -181,6 +180,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByElement("Anemo")
+                                        elementMenuExpanded = false
                                     }
                                 ) {
                                     Text("Anemo")
@@ -188,6 +188,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByElement("Electro")
+                                        elementMenuExpanded = false
                                     }
                                 ) {
                                     Text("Electro")
@@ -195,6 +196,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByElement("Cryo")
+                                        elementMenuExpanded = false
                                     }
                                 ) {
                                     Text("Cryo")
@@ -202,6 +204,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByElement("Geo")
+                                        elementMenuExpanded = false
                                     }
                                 ) {
                                     Text("Geo")
@@ -209,6 +212,7 @@ fun CharactersViews(
                                 DropdownMenuItem(
                                     onClick = {
                                         viewModel.filterCharListByElement("Hydro")
+                                        elementMenuExpanded = false
                                     }
                                 ) {
                                     Text("Hydro")

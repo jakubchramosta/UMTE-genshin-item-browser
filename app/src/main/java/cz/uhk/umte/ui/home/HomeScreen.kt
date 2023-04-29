@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import cz.uhk.umte.R
 import cz.uhk.umte.ui.navigateCharacterScreen
+import cz.uhk.umte.ui.navigateWeaponScreen
 
 @Composable
 fun HomeScreen(
@@ -38,6 +39,13 @@ fun HomeScreen(
             }
         ) {
             Text(text = stringResource(id = R.string.home_btn_characters))
+        }
+        Button(
+            onClick = {
+                parentController.navigateWeaponScreen()
+            }
+        ) {
+            Text(text = stringResource(id = R.string.home_btn_weapons))
         }
     }
 }

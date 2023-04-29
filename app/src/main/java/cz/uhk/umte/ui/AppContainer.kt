@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import cz.uhk.umte.ui.async.characters.characterInfo.CharacterInfoScreen
 import cz.uhk.umte.ui.async.characters.CharactersScreen
+import cz.uhk.umte.ui.async.weapons.WeaponsScreen
 import cz.uhk.umte.ui.home.HomeScreen
 
 @Composable
@@ -48,6 +49,12 @@ fun AppContainer(
                 characterName = navBackStackEntry.arguments?.getString(ArgCharacterName).orEmpty(),
             )
         }
+
+        composable(
+            route = DestinationWeapons,
+        ) {
+            WeaponsScreen()
+        }
     }
 }
 
@@ -57,11 +64,16 @@ private const val DestinationHome = "home"
 private const val DestinationCharacters = "characters"
 private const val DestinationCharacterInfo = "character/{$ArgCharacterName}"
 
+private const val DestinationWeapons = "weapons"
+
 fun NavHostController.navigateCharacterScreen() =
     navigate(DestinationCharacters)
 
 fun NavHostController.navigateCharacterInfo(characterName: String) =
     navigate(DestinationCharacterInfo.replaceArg(ArgCharacterName, characterName))
+
+fun NavHostController.navigateWeaponScreen() =
+    navigate(DestinationWeapons)
 
 private fun String.replaceArg(argName: String, value: String) =
     replace("{$argName}", value)

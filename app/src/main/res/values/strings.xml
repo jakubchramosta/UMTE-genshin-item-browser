@@ -5,8 +5,9 @@
     <string name="home_btn_filterByWeapon">Weapon</string>
     <string name="home_btn_filterByElement">Element</string>
     <string name="home_btn_resetFilter">Reset</string>
-    <string name="home_btn_artifacts">Artifacts</string>
     <string name="home_btn_weapons">Weapons</string>
+    <string name="home_btn_filterByWeaponType">Type</string>
+    <string name="home_btn_artifacts">Artifacts</string>
 
     <string name="retry">Load again</string>
 

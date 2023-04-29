@@ -27,6 +27,8 @@ class CharactersViewModel(
 
             repo.fetchAllCharacters().let {
                 for ((count, charInfo) in it.withIndex()){
+                    println(charInfo)
+                    println(charactersIDs[count])
                     charInfo.characterId = charactersIDs[count]
                 }
                 _characterList.emit(it)

@@ -17,8 +17,6 @@ import org.koin.androidx.compose.getViewModel
 fun ComparisonScreen(
     viewModel: WeaponsViewModel = getViewModel(),
 ) {
-
-    //TODO: vytvořit list obsahující max 2 zbraně (pro porovnání)
     val compareList = viewModel.weaponList.collectAsState()
 
     ComparionView(

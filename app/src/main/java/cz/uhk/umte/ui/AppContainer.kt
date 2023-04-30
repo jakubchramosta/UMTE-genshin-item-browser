@@ -1,7 +1,6 @@
 package cz.uhk.umte.ui
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,6 +9,7 @@ import androidx.navigation.navArgument
 import cz.uhk.umte.ui.async.characters.characterInfo.CharacterInfoScreen
 import cz.uhk.umte.ui.async.characters.CharactersScreen
 import cz.uhk.umte.ui.async.weapons.WeaponsScreen
+import cz.uhk.umte.ui.async.weapons.comparison.ComparisonScreen
 import cz.uhk.umte.ui.home.HomeScreen
 
 @Composable
@@ -53,7 +53,15 @@ fun AppContainer(
         composable(
             route = DestinationWeapons,
         ) {
-            WeaponsScreen()
+            WeaponsScreen(
+                toComparisonScreen = { controller.navigateToCompare() }
+            )
+        }
+
+        composable(
+            route = DestinationCompareScreen,
+        ) {
+            ComparisonScreen()
         }
     }
 }
@@ -65,6 +73,7 @@ private const val DestinationCharacters = "characters"
 private const val DestinationCharacterInfo = "character/{$ArgCharacterName}"
 
 private const val DestinationWeapons = "weapons"
+private const val DestinationCompareScreen = "compare"
 
 fun NavHostController.navigateCharacterScreen() =
     navigate(DestinationCharacters)
@@ -74,6 +83,9 @@ fun NavHostController.navigateCharacterInfo(characterName: String) =
 
 fun NavHostController.navigateWeaponScreen() =
     navigate(DestinationWeapons)
+
+fun NavHostController.navigateToCompare() =
+    navigate(DestinationCompareScreen)
 
 private fun String.replaceArg(argName: String, value: String) =
     replace("{$argName}", value)

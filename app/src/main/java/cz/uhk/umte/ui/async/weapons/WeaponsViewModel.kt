@@ -17,7 +17,7 @@ class WeaponsViewModel(
     private val _textFieldInput = MutableStateFlow<String>("")
     val textFieldInput = _textFieldInput.asStateFlow()
 
-    val compareList: MutableList<WeaponInfoResponse> = mutableListOf()
+    var compareList: MutableList<WeaponInfoResponse> = mutableListOf()
 
     init {
         fetchAllWeapons()
@@ -25,16 +25,8 @@ class WeaponsViewModel(
 
     private fun fetchAllWeapons() {
         launch {
-            println("started launch_____________")
-
             val weaponsIDs = repo.fetchWeaponsIDs()
-
-            println(weaponsIDs)
-
             try {
-
-                println("after weaponids---------")
-
                 repo.fetchAllWeapons().let {
                     for ((count, wepInfo) in it.withIndex()){
                         println(count)
@@ -42,9 +34,6 @@ class WeaponsViewModel(
                         println(weaponsIDs[count])
                         wepInfo.weaponId = weaponsIDs[count]
                     }
-
-                    println("end of for ///////////////")
-
                     _weaponList.emit(it)
                 }
 
@@ -52,8 +41,6 @@ class WeaponsViewModel(
                 println(e)
                 println(e.message)
             }
-
-            println("end of launch+++++++++++++")
         }
     }
 

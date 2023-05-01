@@ -20,4 +20,7 @@ class GenshinDevRepository(
 
     suspend fun fetchAllWeapons() =
         api.fetchAllWeapons()
+
+    suspend fun fetchWeaponByName(wepID: String) =
+        api.fetchWeaponByName(wepID)
 }

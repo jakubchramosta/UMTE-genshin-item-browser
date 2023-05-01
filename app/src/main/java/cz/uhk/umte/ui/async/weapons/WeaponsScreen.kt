@@ -32,7 +32,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun WeaponsScreen(
     viewModel: WeaponsViewModel = getViewModel(),
-    toComparisonScreen: () -> Unit,
+    toComparisonScreen: (List<WeaponInfoResponse>) -> Unit,
     ) {
 
     val weaponList = viewModel.weaponList.collectAsState()
@@ -53,7 +53,7 @@ fun WeaponsViews(
     weaponList: List<WeaponInfoResponse> = emptyList(),
     state: State = State.None,
     textFieldInput: String = "",
-    toComparisonScreen: () -> Unit = {},
+    toComparisonScreen: (List<WeaponInfoResponse>) -> Unit = {},
     viewModel: WeaponsViewModel = getViewModel(),
 ) {
     var wpTypeMenuExp by remember { mutableStateOf(false) }
@@ -166,13 +166,11 @@ fun WeaponsViews(
                         }
                         Column {
                             Button(
-                                onClick = toComparisonScreen
+                                onClick = { toComparisonScreen(viewModel.compareList) }
                             ) {
                                 Text("Compare")
                             }
                         }
-
-
                     }
 
                     // List

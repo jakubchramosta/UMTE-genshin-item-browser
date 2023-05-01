@@ -7,6 +7,7 @@ import cz.uhk.umte.di.repositories.GenshinDevRepository
 import cz.uhk.umte.ui.async.characters.characterInfo.CharacterInfoViewModel
 import cz.uhk.umte.ui.async.characters.CharactersViewModel
 import cz.uhk.umte.ui.async.weapons.WeaponsViewModel
+import cz.uhk.umte.ui.async.weapons.comparison.ComparisonViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
@@ -27,6 +28,7 @@ val dataModule = module {
 val uiModule = module {
     viewModel { CharactersViewModel(get()) }
     viewModel { WeaponsViewModel(get())}
+    viewModel { ComparisonViewModel(get())}
     viewModel { (characterName: String) -> CharacterInfoViewModel(characterName, get()) }
 }
 

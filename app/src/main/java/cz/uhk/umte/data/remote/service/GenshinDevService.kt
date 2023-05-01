@@ -23,4 +23,9 @@ interface GenshinDevService {
 
     @GET("weapons/all")
     suspend fun fetchAllWeapons(): List<WeaponInfoResponse>
+
+    @GET("weapons/{wepID}")
+    suspend fun fetchWeaponByName(
+        @Path("wepID") wepID: String
+    ): WeaponInfoResponse?
 }

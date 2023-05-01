@@ -112,7 +112,7 @@ fun WeaponDetail(
     Spacer(modifier = Modifier.height(10.dp))
     Text(text = "Type: " + wep.type)
     Spacer(modifier = Modifier.height(10.dp))
-    Text(text = "Base ATK: ")
+    Text(text = "Base ATK: " + wep.baseAttack)
     Spacer(modifier = Modifier.height(10.dp))
     Text(text = "Sub stat: " + wep.subStat)
     Spacer(modifier = Modifier.height(10.dp))

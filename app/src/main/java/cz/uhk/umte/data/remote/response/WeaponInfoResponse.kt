@@ -11,13 +11,8 @@ class WeaponInfoResponse(
     @SerialName("name")
     val name: String,
 
-    //TODO:
-//    Pokud se odkomentuje -> kotlinx.serialization.MissingFieldException:
-//    Některé zbraně nemají description, při serializaci si s tím nedokáže
-//    poradit a celý proces serializace selže i když v WeaponIfoResponse je
-//    nullable String?
-//    @SerialName("baseAttack")
-//    val baseAttack: Int?,
+    @SerialName("baseAttack")
+    val baseAttack: Int? = 0,
 
     @SerialName("type")
     val type: String?,

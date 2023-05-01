@@ -45,7 +45,6 @@ fun WeaponsScreen(
         textFieldInput = textFieldInput.value,
         toComparisonScreen = toComparisonScreen,
     )
-
 }
 
 @Composable
@@ -57,6 +56,7 @@ fun WeaponsViews(
     viewModel: WeaponsViewModel = getViewModel(),
 ) {
     var wpTypeMenuExp by remember { mutableStateOf(false) }
+    val dialogShown = remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -166,7 +166,11 @@ fun WeaponsViews(
                         }
                         Column {
                             Button(
-                                onClick = { toComparisonScreen(viewModel.compareList) }
+                                onClick = {
+                                    if (viewModel.compareList.count() == 2)
+                                        toComparisonScreen(viewModel.compareList)
+                                    else dialogShown.switch()
+                                }
                             ) {
                                 Text("Compare")
                             }
@@ -229,7 +233,24 @@ fun WeaponsViews(
                         }
                     }
                 }
+
+                if (dialogShown.value) {
+                    AlertDialog(
+                        onDismissRequest = { dialogShown.switch() },
+                        buttons = {
+                            TextButton(onClick = { dialogShown.switch() }) {
+                                Text("Ok")
+                            }
+                        },
+                        title = { Text("Ops") },
+                        text = { Text("Choose two weapons!") },
+                    )
+                }
             }
         }
     }
+}
+
+fun MutableState<Boolean>.switch() {
+    value = value.not()
 }

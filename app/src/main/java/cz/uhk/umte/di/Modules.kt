@@ -28,7 +28,7 @@ val dataModule = module {
 val uiModule = module {
     viewModel { CharactersViewModel(get()) }
     viewModel { WeaponsViewModel(get())}
-    viewModel { ComparisonViewModel(get())}
+    viewModel { (wepID1: String, wepID2: String) -> ComparisonViewModel(wepID1, wepID2, get())}
     viewModel { (characterName: String) -> CharacterInfoViewModel(characterName, get()) }
 }
 

@@ -54,26 +54,39 @@ fun AppContainer(
             route = DestinationWeapons,
         ) {
             WeaponsScreen(
-                toComparisonScreen = { controller.navigateToCompare() }
+                toComparisonScreen = {compareList ->
+                    controller.navigateToCompare(
+                        compareList[0].weaponId,
+                        compareList[1].weaponId,
+                    ) }
             )
         }
 
         composable(
             route = DestinationCompareScreen,
-        ) {
-            ComparisonScreen()
+            arguments = listOf(
+                navArgument("wepID1") { type = NavType.StringType },
+                navArgument("wepID2") { type = NavType.StringType })
+        ) {navBackStackEntry ->
+            ComparisonScreen(
+                wepID1 = navBackStackEntry.arguments?.getString("wepID1").orEmpty(),
+                wepID2 = navBackStackEntry.arguments?.getString("wepID2").orEmpty(),
+            )
         }
     }
 }
 
 private const val ArgCharacterName = "argCharacterName"
 
+private const val ArgWepID1 = "wepID1"
+private const val ArgWepID2 = "wepID2"
+
 private const val DestinationHome = "home"
 private const val DestinationCharacters = "characters"
 private const val DestinationCharacterInfo = "character/{$ArgCharacterName}"
 
 private const val DestinationWeapons = "weapons"
-private const val DestinationCompareScreen = "compare"
+private const val DestinationCompareScreen = "compare/{$ArgWepID1}/{$ArgWepID2}"
 
 fun NavHostController.navigateCharacterScreen() =
     navigate(DestinationCharacters)
@@ -84,8 +97,8 @@ fun NavHostController.navigateCharacterInfo(characterName: String) =
 fun NavHostController.navigateWeaponScreen() =
     navigate(DestinationWeapons)
 
-fun NavHostController.navigateToCompare() =
-    navigate(DestinationCompareScreen)
+fun NavHostController.navigateToCompare(wepID1: String, wepID2: String) =
+    navigate(DestinationCompareScreen.replaceArg(ArgWepID1, wepID1).replaceArg(ArgWepID2, wepID2))
 
 private fun String.replaceArg(argName: String, value: String) =
     replace("{$argName}", value)

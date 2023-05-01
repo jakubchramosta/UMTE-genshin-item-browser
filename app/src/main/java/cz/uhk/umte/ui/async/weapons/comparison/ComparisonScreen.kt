@@ -54,30 +54,38 @@ fun ComparisonScreen(
             }
 
             is State.Success -> {
-                Row (
-                    modifier = Modifier.fillMaxSize()
-                ){
-                    Column(
-                        modifier = Modifier.fillMaxWidth(0.5f)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        weapon1.value?.let { weapon ->
-                            WeaponDetail(weapon)
-                        } ?: run {
-                            Text(text = "No data available")
-                        }
-                    }
-                    Spacer(
-                        modifier = Modifier.width(5.dp)
+                Column {
+                    Text(
+                        text = "Comparison",
+                        style = MaterialTheme.typography.h2,
+                        modifier = Modifier.fillMaxWidth().padding(5.dp, 0.dp)
                     )
-                    Column(
-                        modifier = Modifier.fillMaxWidth()
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        weapon2.value?.let { weapon ->
-                            WeaponDetail(weapon)
-                        } ?: run {
-                            Text(text = "No data available")
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row (
+                        modifier = Modifier.fillMaxSize()
+                    ){
+                        Column(
+                            modifier = Modifier.fillMaxWidth(0.5f)
+                                .verticalScroll(rememberScrollState())
+                                .padding(10.dp)
+                        ) {
+                            weapon1.value?.let { weapon ->
+                                WeaponDetail(weapon)
+                            } ?: run {
+                                Text(text = "No data available")
+                            }
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Column(
+                            modifier = Modifier.fillMaxWidth()
+                                .verticalScroll(rememberScrollState())
+                                .padding(10.dp)
+                        ) {
+                            weapon2.value?.let { weapon ->
+                                WeaponDetail(weapon)
+                            } ?: run {
+                                Text(text = "No data available")
+                            }
                         }
                     }
                 }
@@ -101,9 +109,13 @@ fun WeaponDetail(
         text = wep.name,
         style = MaterialTheme.typography.h5
     )
+    Spacer(modifier = Modifier.height(10.dp))
     Text(text = "Type: " + wep.type)
+    Spacer(modifier = Modifier.height(10.dp))
     Text(text = "Base ATK: ")
+    Spacer(modifier = Modifier.height(10.dp))
     Text(text = "Sub stat: " + wep.subStat)
+    Spacer(modifier = Modifier.height(10.dp))
     Text(text = "Passive:")
     wep.passiveDesc?.let { Text(text = it) }
 }

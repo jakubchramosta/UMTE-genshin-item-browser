@@ -71,12 +71,19 @@ fun CharacterInfoView(info: CharacterInfoResponse, character: String) {
             contentScale = ContentScale.FillWidth,
             alignment = Alignment.Center,
         )
+        Spacer(modifier = Modifier.height(10.dp))
         Text(text = info.name,
             style = MaterialTheme.typography.h3)
+        Spacer(modifier = Modifier.height(10.dp))
         Text(text = "Vision: "+info.vision)
+        Spacer(modifier = Modifier.height(10.dp))
         Text(text = "Weapon: "+info.weapon)
+        Spacer(modifier = Modifier.height(10.dp))
         Text(text = "Nation: "+info.nation)
+        Spacer(modifier = Modifier.height(10.dp))
         Text(text = "Affiliation: "+info.affiliation)
-        Text(text = "Description: "+info.description)
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(text = "Description:")
+        info.description?.let { Text(text = it) }
     }
 }
